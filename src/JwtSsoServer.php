@@ -119,14 +119,15 @@ class JwtSsoServer
     // 刷新token
     public function refreshToken($site, $token = null)
     {
-        if($token){
+        if ($token) {
             $token = str_replace('Bearer ', '', $token);
-        }else{
+        } else {
             $token = $this->getRequestToken();
         }
         $payload = $this->parseToken($token);
-        $userData = Cache::get($payload['jti'].'_data', ['uid'=>0]);
+        $userData = Cache::get($payload['jti'].'_data', ['uid' => 0]);
         $this->logout($site, $token);
+
         return $this->getToken($userData);
     }
 
