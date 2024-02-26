@@ -1,10 +1,11 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix'     => 'sso',
-    'namespace'  => 'yangweijie\\jwt\\Controller',
-    'as'         => 'sso.',
+    'prefix' => 'sso',
+    'namespace' => 'yangweijie\\jwt\\Controller',
+    'as' => 'sso.',
 ], function ($router) {
 
     // 登陆

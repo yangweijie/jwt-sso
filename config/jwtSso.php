@@ -1,4 +1,5 @@
 <?php
+
 return [
     /**
      * 不需要检查的路由，如果使用jwt提供的默认中间件，可以对某些不用做检验的路由进行配置，例如登录等
@@ -14,7 +15,7 @@ return [
      * 正则写法：["**", "/api/{name:.+}"]  支持模块化不做jwt token的校验，例如：/api/login/login
      */
     'no_check_route' => [
-        ["**", "/**"],
+        ['**', '/**'],
     ],
 
     'login_type' => env('JWT_LOGIN_TYPE', 'mpop'), //  登录方式，sso为单点登录，mpop为多点登录
@@ -73,13 +74,13 @@ return [
      */
     'issued_by' => 'yangweijie/jwt-sso',
 
-    'sites'=>[
-        'main'=>[
-            'domain'=>env('JWT_MAIN_SITE_URL', ''),
+    'sites' => [
+        'main' => [
+            'domain' => env('JWT_MAIN_SITE_URL', ''),
         ],
-        'subsite1'=>[
-            'domain'=>env('APP_URL'),
-        ]
+        'subsite1' => [
+            'domain' => env('APP_URL'),
+        ],
     ],
-    'current_site'=>'main',
+    'current_site' => 'main',
 ];

@@ -1,9 +1,8 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace yangweijie\jwt;
-
 
 /*
  * 响应
@@ -18,8 +17,6 @@ class Response
 
     /**
      * Initializes a new Response
-     *
-     * @param array $headers
      */
     public function __construct(array $headers = [])
     {
@@ -42,7 +39,7 @@ class Response
         // 是否允许后续请求携带认证信息(cookies)
         // 该值只能是 true, 否则不返回
         if ($allowCredentials) {
-            return $this->withHeader('Access-Control-Allow-Credentials', "true");
+            return $this->withHeader('Access-Control-Allow-Credentials', 'true');
         }
 
         return $this;
@@ -146,17 +143,13 @@ class Response
     /**
      * 输出成功响应
      *
-     * @param  string $message
-     * @param  mixed  $data
-     * @param  int    $code
-     * @param  array  $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function success(
-        string $message = "",
-        mixed  $data    = [],
-        int    $code    = 200,
-        array  $headers = []
+        string $message = '',
+        mixed $data = [],
+        int $code = 200,
+        array $headers = []
     ): mixed {
         return $this->json(true, $code, $message, $data, $headers);
     }
@@ -164,17 +157,13 @@ class Response
     /**
      * 输出失败响应
      *
-     * @param  string $message
-     * @param  int    $code
-     * @param  mixed  $data
-     * @param  array  $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function error(
-        string $message = "",
-        int    $code    = 500,
-        mixed  $data    = [],
-        array  $headers = []
+        string $message = '',
+        int $code = 500,
+        mixed $data = [],
+        array $headers = []
     ): mixed {
         return $this->json(false, $code, $message, $data, $headers);
     }
@@ -182,23 +171,19 @@ class Response
     /**
      * 输出响应
      *
-     * @param  boolen $success
-     * @param  int    $code
-     * @param  string $message
-     * @param  mixed  $data
-     * @param  array  $headers
+     * @param  boolen  $success
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function json(
-        bool   $success = true,
-        int    $code    = 419,
-        string $message = "",
-        mixed  $data    = [],
-        array  $headers = []
+        bool $success = true,
+        int $code = 419,
+        string $message = '',
+        mixed $data = [],
+        array $headers = []
     ): mixed {
         $result = [
             'success' => $success,
-            'code'    => $code,
+            'code' => $code,
         ];
 
         if (! empty($message)) {
@@ -216,13 +201,11 @@ class Response
     /**
      * 将数组以标准 json 格式返回
      *
-     * @param  array $data
-     * @param  array $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function returnJson(array $data, array $headers = []): mixed
     {
-        $contents = json_encode($data, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+        $contents = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         return $this->returnJsonFromString($contents, $headers);
     }
@@ -230,8 +213,6 @@ class Response
     /**
      * 将 json 字符串以标准 json 格式返回
      *
-     * @param  string $contents
-     * @param  array  $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function returnJsonFromString(string $contents, array $headers = []): mixed
@@ -247,8 +228,6 @@ class Response
     /**
      * 返回字符
      *
-     * @param  string $contents
-     * @param  array  $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function returnString(string $contents, array $headers = []): mixed
@@ -264,8 +243,6 @@ class Response
     /**
      * 返回数据
      *
-     * @param  string $contents
-     * @param  array  $headers
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function returnData(string $contents, array $headers = []): mixed
@@ -274,5 +251,4 @@ class Response
 
         return response($contents, 200, $headers);
     }
-
 }

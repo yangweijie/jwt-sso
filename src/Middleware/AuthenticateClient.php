@@ -1,20 +1,19 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace yangweijie\jwt\Middleware;
 
 use Closure;
-
 use yangweijie\jwt\JwtSso;
 use yangweijie\jwt\Traits\ClientResponseJson as ResponseJsonTrait;
-
 
 class AuthenticateClient
 {
     use ResponseJsonTrait;
 
     protected $jwtServer;
+
     protected $jwtClient;
 
     public function __construct(JwtSso $jwtSso)
@@ -40,7 +39,7 @@ class AuthenticateClient
     protected function jwtCheck()
     {
         $authorization = request()->header('Authorization');
-        if (!$authorization) {
+        if (! $authorization) {
             return $this->error(__('token不能为空'), JwtSso::TOKEN_ERROR_CODE);
         }
 
@@ -53,20 +52,20 @@ class AuthenticateClient
         }
 
         $accessToken = $authorizationArr[1];
-        if (!$accessToken) {
+        if (! $accessToken) {
             return $this->error(__('token不能为空'), JwtSso::TOKEN_ERROR_CODE);
         }
 
-        if (count(explode('.', $accessToken)) <> 3) {
+        if (count(explode('.', $accessToken)) != 3) {
             return $this->error(__('token格式错误'), JwtSso::TOKEN_ERROR_CODE);
         }
 
         try {
             $this->jwtServer->parseToken($accessToken);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return $this->error(__('token已失效'), JwtSso::TOKEN_ERROR_CODE);
         }
-        if($this->jwtServer->hasTokenBlack($accessToken, config('jwt.current_site', 'main'))){
+        if ($this->jwtServer->hasTokenBlack($accessToken, config('jwt.current_site', 'main'))) {
             return $this->error(__('token已失效'), JwtSso::TOKEN_ERROR_CODE);
         }
 
@@ -76,8 +75,7 @@ class AuthenticateClient
     /**
      * Determine if the request has a URI that should pass through verification.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
     protected function shouldPassThrough($request)
@@ -95,7 +93,8 @@ class AuthenticateClient
         return collect($excepts)
             ->contains(function ($except) {
                 $requestUrl = \Route::currentRouteName();
-                return ($except == $requestUrl);
+
+                return $except == $requestUrl;
             });
     }
 
@@ -106,5 +105,4 @@ class AuthenticateClient
     {
         return RouteService::formatRouteSlug($slug);
     }
-
 }

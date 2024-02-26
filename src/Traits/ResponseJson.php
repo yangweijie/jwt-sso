@@ -1,13 +1,12 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace yangweijie\jwt\Traits;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-
 
 trait ResponseJson
 {
@@ -16,17 +15,18 @@ trait ResponseJson
      */
     protected function success(
         string $message,
-        mixed  $data = [],
-        array  $headers = [],
-        int    $code = 0
+        mixed $data = [],
+        array $headers = [],
+        int $code = 0
     ) {
         $data = [
-            'data'=>$data,
-            'msg'=>$message,
-            'code'=>$code,
+            'data' => $data,
+            'msg' => $message,
+            'code' => $code,
         ];
         Log::info($message);
-        return Request::expectsJson()?
+
+        return Request::expectsJson() ?
             Response::json($data, $code, $headers) :
             redirect('home')->with('message', $message);
     }
@@ -36,18 +36,19 @@ trait ResponseJson
      */
     protected function error(
         string $message,
-        int    $code = 1,
-        mixed  $data = [],
-        array  $headers = []
+        int $code = 1,
+        mixed $data = [],
+        array $headers = []
     ) {
         $data = [
-            'data'=>$data,
-            'msg'=>$message,
-            'code'=>$code,
+            'data' => $data,
+            'msg' => $message,
+            'code' => $code,
         ];
 
         Log::error($message);
-        return Request::expectsJson()?
+
+        return Request::expectsJson() ?
             Response::json($data, $code, $headers) :
             redirect('login')->with('message', $message);
     }
@@ -75,5 +76,4 @@ trait ResponseJson
     {
         return Response::returnString($contents, $header);
     }
-
 }

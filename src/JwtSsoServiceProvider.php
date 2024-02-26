@@ -25,14 +25,14 @@ class JwtSsoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-            $this->publishes([
-                __DIR__.'/../config/jwtSso.php' => config_path('jwt.php'),
-            ], 'jwtSso-config');
+        $this->publishes([
+            __DIR__.'/../config/jwtSso.php' => config_path('jwt.php'),
+        ], 'jwtSso-config');
 
-//
+        //
         $this->defineRoutes();
-//        $this->configureGuard();
-//        $this->configureMiddleware();
+        //        $this->configureGuard();
+        //        $this->configureMiddleware();
     }
 
     public function defineRoutes()
