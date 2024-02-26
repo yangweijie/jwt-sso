@@ -1,46 +1,59 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "yangweijie/jwt-sso",
+    "description": "sso with firebase/Jwt",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "yangweijie/jwt-sso",
+        "jwt-sso"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/yangweijie/jwt-sso",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "yangweijie",
+            "email": "917647288@qq.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^7.4 || ^8.0",
+        "firebase/php-jwt" : "6.*",
+        "nesbot/carbon": "^1.0 || ^2.0 || ^3.0",
+        "juststeveking/php-sdk": "^1.0 || ^2.0 || ^3.0",
+        "laravel/framework": "^6.0 || ^8.0 || ^10.10"
     },
     "require-dev": {
-        :require_dev_testing,
-        :require_dev_codestyle,
+        "pestphp/pest": "^2.15",
+        "laravel/pint": "^1.0",
         "spatie/ray": "^1.28"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "yangweijie\\jwt\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "yangweijie\\jwt\\Tests\\": "tests"
         }
     },
     "scripts": {
-        :scripts_testing,
-        :scripts_codestyle
+        "test": "vendor/bin/pest",
+            "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "yangweijie\\jwt\\JwtSsoServiceProvider"
+            ]
+        }
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            :plugins_testing,
-            "phpstan/extension-installer": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",
