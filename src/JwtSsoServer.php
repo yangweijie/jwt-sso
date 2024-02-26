@@ -119,24 +119,15 @@ class JwtSsoServer
     // 刷新token
     public function refreshToken($site, $token = null)
     {
-        if (! $token) {
+        if($token){
+            $token = str_replace('Bearer ', '', $token);
+        }else{
             $token = $this->getRequestToken();
         }
-        $userData = $this->parseToken($token);
-        if ($this->config['login_type'] == 'sso') {
-            $uid = last(explode('_', $userData['jit']));
-        } else {
-            $uid = 0;
-        }
+        $payload = $this->parseToken($token);
+        $userData = Cache::get($payload['jti'].'_data', ['uid'=>0]);
         $this->logout($site, $token);
-        $newData = [];
-        foreach ($userData as $key => $value) {
-            if (! in_array($key, ['exp', 'nbf', 'iat', 'jti', 'iss', 'exp'])) {
-                $newData[$key] = $value;
-            }
-        }
-
-        return $this->getToken($newData);
+        return $this->getToken($userData);
     }
 
     // 是否在黑名单中
