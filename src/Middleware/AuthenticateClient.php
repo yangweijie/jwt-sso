@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace yangweijie\jwt\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Route;
 use yangweijie\jwt\JwtSso;
 use yangweijie\jwt\Traits\ClientResponseJson as ResponseJsonTrait;
 
@@ -92,17 +93,10 @@ class AuthenticateClient
 
         return collect($excepts)
             ->contains(function ($except) {
-                $requestUrl = \Route::currentRouteName();
+                $requestUrl = Route::currentRouteName();
 
                 return $except == $requestUrl;
             });
     }
 
-    /**
-     * 格式化路由标识
-     */
-    protected function formatRouteSlug($slug = '')
-    {
-        return RouteService::formatRouteSlug($slug);
-    }
 }

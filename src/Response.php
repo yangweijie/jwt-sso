@@ -10,6 +10,10 @@ namespace yangweijie\jwt;
  * @create 2020-10-19
  * @author deatil
  */
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+
 class Response
 {
     // 输出头信息列表
@@ -26,7 +30,7 @@ class Response
     /**
      * 允许跨域域名 *
      */
-    public function withAllowOrigin(string $allowOrigin): self
+    public function withAllowOrigin(mixed $allowOrigin): self
     {
         return $this->withHeader('Access-Control-Allow-Origin', $allowOrigin);
     }
@@ -143,11 +147,11 @@ class Response
     /**
      * 输出成功响应
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response|ResponseFactory
      */
     public function success(
         string $message = '',
-        mixed $data = [],
+        array $data = [],
         int $code = 200,
         array $headers = []
     ): mixed {
@@ -157,12 +161,12 @@ class Response
     /**
      * 输出失败响应
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response|ResponseFactory
      */
     public function error(
         string $message = '',
         int $code = 500,
-        mixed $data = [],
+        array $data = [],
         array $headers = []
     ): mixed {
         return $this->json(false, $code, $message, $data, $headers);
@@ -171,14 +175,13 @@ class Response
     /**
      * 输出响应
      *
-     * @param  boolen  $success
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response|ResponseFactory
      */
     public function json(
         bool $success = true,
         int $code = 419,
         string $message = '',
-        mixed $data = [],
+        array $data = [],
         array $headers = []
     ): mixed {
         $result = [
@@ -201,7 +204,7 @@ class Response
     /**
      * 将数组以标准 json 格式返回
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response|ResponseFactory
      */
     public function returnJson(array $data, array $headers = []): mixed
     {
@@ -213,9 +216,11 @@ class Response
     /**
      * 将 json 字符串以标准 json 格式返回
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @param string $contents
+     * @param array $headers
+     * @return  \Illuminate\Http\Response|\Illuminate\Foundation\Application
      */
-    public function returnJsonFromString(string $contents, array $headers = []): mixed
+    public function returnJsonFromString(string $contents, array $headers = []): \Illuminate\Http\Response|\Illuminate\Foundation\Application
     {
         // 添加 json 输出相应
         $headers = array_merge($headers, [
@@ -228,7 +233,7 @@ class Response
     /**
      * 返回字符
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response|ResponseFactory
      */
     public function returnString(string $contents, array $headers = []): mixed
     {
@@ -243,9 +248,11 @@ class Response
     /**
      * 返回数据
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @param string $contents
+     * @param array $headers
+     * @return Application|\Illuminate\Http\Response|\Illuminate\Foundation\Application
      */
-    public function returnData(string $contents, array $headers = []): mixed
+    public function returnData(string $contents, array $headers = []): Application|\Illuminate\Http\Response|\Illuminate\Foundation\Application
     {
         $headers = $this->withHeaders($headers)->getHeaders();
 

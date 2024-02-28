@@ -1,56 +1,38 @@
 # sso with firebase/Jwt
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/yangweijie-jwt-sso/jwt-sso.svg?style=flat-square)](https://packagist.org/packages/yangweijie-jwt-sso/jwt-sso)
-[![Tests](https://img.shields.io/github/actions/workflow/status/yangweijie-jwt-sso/jwt-sso/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/yangweijie-jwt-sso/jwt-sso/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/yangweijie-jwt-sso/jwt-sso.svg?style=flat-square)](https://packagist.org/packages/yangweijie-jwt-sso/jwt-sso)
+基于 firebase/jwt 库实现的sso 单点登录，支持服务端生成token，登出、续期、加入黑名单
+支持客户端跳转主站完成sso登录后跳回原站点，支持中间件auth。支持客户端登出、加入黑名单和续期。
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+## 安装
 
-## Support us
+在composer.json 中添加 
+~~~
+    "repositories": {
+        "yangweijie/jwt-sso": {
+            "type": "vcs",
+            "url": "https://git.tun.jsaix.cn/yangweijie/jwt-sso"
+        }
+    },
+~~~
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/jwt-sso.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/jwt-sso)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-## Installation
-
-You can install the package via composer:
+后通过composer安装包:
 
 ```bash
 composer require yangweijie-jwt-sso/jwt-sso
 ```
 
-## Usage
+## 使用
 
 ```php
-$skeleton = new yangweijie/jwt/JwtSso();
-echo $skeleton->echoPhrase('Hello, yangweijie/jwt!');
+
+参考 
+
 ```
 
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
-- [yangweijie](https://github.com/yangweijie)
-- [All Contributors](../../contributors)
+- [yangweijie](https://git.tun.jsaix.cn/yangweijie/jwt-sso)
 
 ## License
 
