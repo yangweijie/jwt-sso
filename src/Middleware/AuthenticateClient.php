@@ -98,5 +98,4 @@ class AuthenticateClient
                 return $except == $requestUrl;
             });
     }
-
 }

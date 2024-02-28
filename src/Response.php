@@ -215,10 +215,6 @@ class Response
 
     /**
      * 将 json 字符串以标准 json 格式返回
-     *
-     * @param string $contents
-     * @param array $headers
-     * @return  \Illuminate\Http\Response|\Illuminate\Foundation\Application
      */
     public function returnJsonFromString(string $contents, array $headers = []): \Illuminate\Http\Response|\Illuminate\Foundation\Application
     {
@@ -247,10 +243,6 @@ class Response
 
     /**
      * 返回数据
-     *
-     * @param string $contents
-     * @param array $headers
-     * @return Application|\Illuminate\Http\Response|\Illuminate\Foundation\Application
      */
     public function returnData(string $contents, array $headers = []): Application|\Illuminate\Http\Response|\Illuminate\Foundation\Application
     {
