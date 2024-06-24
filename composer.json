@@ -19,7 +19,7 @@
         "firebase/php-jwt" : "6.*",
         "nesbot/carbon": "^1.0 || ^2.0 || ^3.0",
         "juststeveking/php-sdk": "^1.0 || ^2.0 || ^3.0",
-        "laravel/framework": "^6.0 || ^8.0 || ^10.10"
+        "laravel/framework": "^11.11.1"
     },
     "require-dev": {
         "pestphp/pest": "^2.15",
